@@ -95,3 +95,6 @@ Style/BlockDelimiters:
 
 Style/RequireOrder:
   Enabled: false
+
+Rails/FindById:
+  Enabled: false

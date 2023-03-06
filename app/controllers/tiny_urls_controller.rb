@@ -44,7 +44,7 @@ class TinyUrlsController < ApplicationController
   private
 
   def set_tiny_url
-    @tiny_url = TinyUrl.find(params[:id])
+    @tiny_url = TinyUrl.find_by!(id: params[:id])
   end
 
   def full_url_param

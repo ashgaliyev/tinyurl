@@ -58,6 +58,19 @@ RSpec.describe(TinyUrlsController) do
       expect(response.content_type).to(eq("application/json; charset=utf-8"))
       expect(response.content_type).to(include("application/json"))
     end
+
+    context "when the tiny_url does not exist" do
+      it "returns a not found response" do
+        get :show, params: { id: "invalid" }
+        expect(response).to(have_http_status(:not_found))
+      end
+
+      it "returns a json response with errors for the tiny_url" do
+        get :show, params: { id: "invalid" }, format: :json
+        expect(response).to(have_http_status(:not_found))
+        expect(response.content_type).to(eq("application/json; charset=utf-8"))
+      end
+    end
   end
 
   describe "GET #redirect" do

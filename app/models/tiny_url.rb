@@ -10,7 +10,7 @@ class TinyUrl
   field :full_url, type: String
 
   validates :full_url, presence: true, uniqueness: true
-  validates :full_url, format: { with: URI::regexp(%w[http https]), message: 'is not a valid URL' }, length: { in: LENGTH, message: "the length of the URL is not valid (#{LENGTH})" }
+  validates :full_url, format: { with: URI::regexp(%w[http https]), message: 'is not a valid URL' }, length: { in: LENGTH, message: "the length of the URL is not valid (#{LENGTH.begin}-#{LENGTH.end})" }
 
   class << self
     def create_url(full_url)

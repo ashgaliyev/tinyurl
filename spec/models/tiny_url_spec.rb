@@ -1,5 +1,16 @@
 require "rails_helper"
 
+shared_examples "invalid entity" do |error_message|
+  it "does not create a new url" do
+    expect { described_class.create_url(invalid_url) }.to_not change { described_class.count }
+  end
+
+  it "adds an error to the url" do
+    expect(described_class.create_url(invalid_url).errors[:full_url]).to include(error_message)
+  end
+end
+
+
 RSpec.describe TinyUrl, type: :model do
   it { is_expected.to be_mongoid_document }
 
@@ -27,25 +38,19 @@ RSpec.describe TinyUrl, type: :model do
     context "when full URL is invalid" do
       let(:invalid_url) { "not a valid url" }
 
-      it "raises an error" do
-        expect { described_class.create_url(invalid_url) }.to raise_error
-      end
+      it_behaves_like "invalid entity", "is not a valid URL"
     end
 
     context "when full URL is too long" do
-      let(:long_url) { "https://www.google.com/" + "a" * 10000 }
+      let(:invalid_url) { "https://www.google.com/" + "a" * 10000 }
 
-      it "raises an error" do
-        expect { described_class.create_url(long_url) }.to raise_error
-      end
+      it_behaves_like "invalid entity", "the length of the URL is not valid (5-1000)"
     end
 
     context "when full URL is too short" do
-      let(:short_url) { "a" }
+      let(:invalid_url) { "a" }
 
-      it "raises an error" do
-        expect { described_class.create_url(short_url) }.to raise_error
-      end
+      it_behaves_like "invalid entity", "the length of the URL is not valid (5-1000)"
     end
   end
 

@@ -7,16 +7,23 @@ class TinyUrl
   field :short_url, type: String
   field :full_url, type: String
 
+  validates :full_url, presence: true, uniqueness: true
+  validates :full_url, format: { with: URI::regexp(%w[http https]), message: 'is not a valid URL' }, length: { in: 5..1000, message: 'the length of the URL is not valid (5-1000)' }
+
   class << self
     def create_url(full_url)
-      if full_url.length < 5 || full_url.length > 1000 || !(full_url =~ URI::regexp)
-        raise ArgumentError.new("Invalid full URL")
-      end
-  
       url = find_by(full_url: full_url)
       return url if url
-        
-      create(short_url: generate_short_url, full_url: full_url)
+
+      @tiny_url = TinyUrl.new
+      @tiny_url.full_url = full_url
+
+      if @tiny_url.valid?
+        @tiny_url.short_url = generate_short_url
+        @tiny_url.save
+      end
+
+      @tiny_url
     end
     
     def get_full_url(short_url)

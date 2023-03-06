@@ -1,24 +1,52 @@
-# README
+# Tiny URL 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+It uses nanoid to generate a random string of 13 characters and stores it in a database. The URL is then served at `http://localhost:3000/<random-string>`.
 
-Things you may want to cover:
+With speed 100 IDs/second ~25 years needed, in order to have a 1% probability of at least one collision.
+https://zelark.github.io/nano-id-cc/
 
-* Ruby version
+It uses MongoDB to allow for easy scaling.
 
-* System dependencies
+## Requirements
+- Ruby 3.1.2
+- Docker
 
-* Configuration
+## Installation
+- `bundle install`
+- Copy `.env.example` to `.env` and fill in the values
 
-* Database creation
+## Usage
+- `docker-compose up` in order to start the database
+- `./bin/dev` to start the server
+- Open `http://localhost:3000` in your browser and enter a URL
 
-* Database initialization
 
-* How to run the test suite
+## API Endpoints
+- `POST /tiny_urls.json` with a JSON body of `{"url": "https://example.com"}` to create a new URL
+Example:
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"url": "https://example.com"}' http://localhost:3000/tiny_urls.json
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Expected response:
+```json
+{
+  "_id": {"$oid":"6406400a9f880b2ecabd666f"},
+  "full_url":"https://example.com",
+  "short_url":"http://localhost:3000/MXEn_n1Ed-yUo"
+}
+```
 
-* Deployment instructions
+- `GET /tiny_urls/:id.json` to get the URL for the given ID
+Example:
+```bash
+curl http://localhost:3000/tiny_urls/6406400a9f880b2ecabd666f.json
+```
 
-* ...
+Expected response:
+```json
+{
+  "full_url":"https://example.com",
+  "short_url":"http://localhost:3000/MXEn_n1Ed-yUo"
+}
+```

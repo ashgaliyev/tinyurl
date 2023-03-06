@@ -14,7 +14,7 @@ class TinyUrlsController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.json { render(json: @tiny_url) }
+      format.json { render(json: @tiny_url, only: %i[full_url short_url]) }
     end
   end
 
@@ -31,7 +31,7 @@ class TinyUrlsController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to(@tiny_url, notice: "Tiny url was successfully created.") }
-        format.json { render(json: @tiny_url, only: %i[full_url short_url], status: :created) }
+        format.json { render(json: @tiny_url, only: %i[_id full_url short_url], status: :created) }
       end
     end
   end

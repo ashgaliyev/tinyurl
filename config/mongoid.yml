@@ -4,12 +4,12 @@ development:
     # Defines the default client. (required)
     default:
       # Mongoid can connect to a URI accepted by the driver:
-      # uri: mongodb://user:password@mongodb.domain.com:27017/shorturl2_development
+      # uri: mongodb://user:password@mongodb.domain.com:27017/tinyurl_development
 
       # Otherwise define the parameters separately.
       # This defines the name of the default database that Mongoid can connect to.
       # (required).
-      database: shorturl2_development
+      database: tinyurl_development
       # Provides the hosts the default client can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
@@ -176,7 +176,7 @@ development:
 test:
   clients:
     default:
-      database: shorturl2_test
+      database: tinyurl_test
       hosts:
         - localhost:27017
       options:

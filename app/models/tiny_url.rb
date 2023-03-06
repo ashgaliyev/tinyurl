@@ -1,6 +1,8 @@
 require 'nanoid'
 
 class TinyUrl
+  LENGTH = 5..1000
+
   include Mongoid::Document
   include Mongoid::Timestamps::Created
 
@@ -8,7 +10,7 @@ class TinyUrl
   field :full_url, type: String
 
   validates :full_url, presence: true, uniqueness: true
-  validates :full_url, format: { with: URI::regexp(%w[http https]), message: 'is not a valid URL' }, length: { in: 5..1000, message: 'the length of the URL is not valid (5-1000)' }
+  validates :full_url, format: { with: URI::regexp(%w[http https]), message: 'is not a valid URL' }, length: { in: LENGTH, message: "the length of the URL is not valid (#{LENGTH})" }
 
   class << self
     def create_url(full_url)

@@ -34,5 +34,7 @@ module Shorturl2
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.mongoid.logger = Logger.new($stdout, :warn)
+    config.mongoid.preload_models = false
   end
 end

@@ -1,0 +1,22 @@
+<%= form_with model: @tiny_url, class: 'max-w-sm', local: true do |form| %>
+  <% if @tiny_url.errors.any? %>
+    <div class="bg-red-200 p-4 mb-4 rounded">
+      <h3 class="text-red-800"><%= pluralize(@tiny_url.errors.count, "error") %> prohibited this url from being saved:</h3>
+
+      <ul class="list-disc list-inside">
+      <% @tiny_url.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= form.label :full_url, class: "block text-gray-700 font-bold" %>
+    <%= form.text_field :full_url, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight", required: true, minlength: TinyUrl::LENGTH.begin, maxlength: TinyUrl::LENGTH.end %>
+  </div>
+
+  <p>
+    <%= form.submit "Create Tiny Url", class: "bg-blue-500 hover:bg-blue-700 hover:cursor-pointer text-white font-bold py-2 px-4 rounded focus:ring-4 focus:ring-blue-700" %>
+  </p>
+<% end %>

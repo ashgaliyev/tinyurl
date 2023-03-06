@@ -1,0 +1,21 @@
+<% if flash[:success] %>
+  <div class="bg-green-200 text-green-800 rounded p-4 mb-4">
+    <%= flash[:success] %>
+  </div>
+<% end %>
+
+<div class="bg-gray-100 rounded p-4 mb-4">
+  <p class="text-gray-800 font-bold mb-2">Full URL:</p>
+  <p>
+    <a href="<%= @tiny_url.full_url %>" target="_blank" class="text-blue-500 hover:text-blue-700"><%= @tiny_url.full_url %></a>
+  </p>
+</div>
+
+<div class="bg-gray-100 rounded p-4 mb-4">
+  <p class="text-gray-800 font-bold mb-2">Short URL:</p>
+  <p>
+    <a href="<%= @tiny_url.short_url %>" target="_blank" class="text-blue-500 hover:text-blue-700"><%= @tiny_url.short_url %></a>
+  </p>
+</div>
+
+<%= link_to "← Create New Link", root_path, class: "text-blue-500 hover:text-blue-700" %>

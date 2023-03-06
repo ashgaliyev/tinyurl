@@ -29,9 +29,9 @@ class TinyUrl
     end
     
     def get_full_url(short_url)
-      url = find_by(short_url: short_url)
-      if url
-        url.full_url
+      tiny_url = find_by(short_url: short_url)
+      if tiny_url
+        tiny_url.full_url
       else
         raise Mongoid::Errors::DocumentNotFound.new(self, { short_url: short_url })
       end

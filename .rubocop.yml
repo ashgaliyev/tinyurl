@@ -1,0 +1,97 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 3.1
+  DisplayCopNames: true
+  EnabledByDefault: true
+  Include:
+    - "**/*.rb"
+    - "**/*.rake"
+    - config.ru
+    - Gemfile
+    - Rakefile
+  Exclude:
+    - bin/**/*
+    - log/**/*
+    - node_modules/**/*
+    - public/**/*
+    - storage/**/*
+    - tmp/**/*
+    - vendor/**/*
+
+Bundler/GemVersion:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Layout/DotPosition:
+  EnforcedStyle: trailing
+
+Layout/HashAlignment:
+  EnforcedLastArgumentHashStyle: ignore_implicit
+
+Layout/LineLength:
+  Max: 120
+
+Metrics/AbcSize:
+  Max: 35
+
+Metrics/BlockLength:
+  Exclude:
+    - app/views/**/*
+    - config/**/*.rb
+    - spec/**/*
+
+Metrics/MethodLength:
+  Max: 25
+
+Metrics/ModuleLength:
+  Max: 120
+  Exclude:
+    - spec/**/*_spec.rb
+
+Rails/FilePath:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Bundler/GemComment:
+  Enabled: false
+
+Lint/ConstantResolution:
+  Enabled: false
+
+Style/ConstantVisibility:
+  Enabled: false
+
+Style/Copyright:
+  Enabled: false
+
+Style/DocumentationMethod:
+  Enabled: false
+
+Style/InlineComment:
+  Enabled: false
+
+Style/MissingElse:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Exclude:
+    - spec/**/*_spec.rb
+
+Style/RequireOrder:
+  Enabled: false

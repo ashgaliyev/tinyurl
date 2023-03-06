@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require 'spec_helper'
-ENV['RAILS_ENV'] ||= 'test'
-require_relative '../config/environment'
+require "spec_helper"
+ENV["RAILS_ENV"] ||= "test"
+require_relative "../config/environment"
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'mongoid'
-require 'rails/mongoid'
-require 'database_cleaner/mongoid'
-require 'mongoid-rspec'
+require "database_cleaner/mongoid"
+require "mongoid"
+require "mongoid-rspec"
+require "rails/mongoid"
 
-require 'rspec/rails'
+require "rspec/rails"
 
 Mongoid.load!(Rails.root.join("config", "mongoid.yml"))
 
@@ -31,7 +33,7 @@ Mongoid.load!(Rails.root.join("config", "mongoid.yml"))
 # Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 
 RSpec.configure do |config|
-  config.include Mongoid::Matchers, type: :model
+  config.include(Mongoid::Matchers, type: :model)
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -63,7 +65,7 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  config.before(:each) do
+  config.before do
     DatabaseCleaner.clean
   end
 end

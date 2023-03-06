@@ -1,9 +1,8 @@
+# frozen_string_literal: true
+
 require_relative "boot"
 
-require "rails"
-# Pick the frameworks you want:
-require "active_model/railtie"
-require "active_job/railtie"
+require "action_cable/engine"
 # require "active_record/railtie"
 # require "active_storage/engine"
 require "action_controller/railtie"
@@ -11,7 +10,10 @@ require "action_mailer/railtie"
 # require "action_mailbox/engine"
 # require "action_text/engine"
 require "action_view/railtie"
-require "action_cable/engine"
+require "active_job/railtie"
+# Pick the frameworks you want:
+require "active_model/railtie"
+require "rails"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
@@ -22,7 +24,7 @@ Bundler.require(*Rails.groups)
 module Shorturl2
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
+    config.load_defaults(6.1)
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -36,5 +38,6 @@ module Shorturl2
     config.generators.system_tests = nil
     config.mongoid.logger = Logger.new($stdout, :warn)
     config.mongoid.preload_models = false
+    config.base_url = ENV.fetch("BASE_URL", "http://localhost:3000")
   end
 end

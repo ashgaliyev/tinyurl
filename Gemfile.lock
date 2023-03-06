@@ -205,6 +205,8 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    tailwindcss-rails (2.0.24-x86_64-darwin)
+      railties (>= 6.0.0)
     thor (1.2.1)
     tilt (2.1.0)
     timeout (0.3.2)
@@ -246,6 +248,7 @@ DEPENDENCIES
   rspec-rails (~> 6.0.0)
   sass-rails (>= 6)
   spring
+  tailwindcss-rails (~> 2.0)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
